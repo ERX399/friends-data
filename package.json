@@ -1,0 +1,11 @@
+{
+  "name": "friends-and-sponsors",
+  "private": true,
+  "description": "Xia 友链和赞助数据源 — 构建后输出聚合 JSON",
+  "scripts": {
+    "build": "node scripts/build.js"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1"
+  }
+}

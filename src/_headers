@@ -1,0 +1,5 @@
+# CORS — allow any site to fetch these JSON files
+/friends.json
+  Access-Control-Allow-Origin: *
+/sponsors.json
+  Access-Control-Allow-Origin: *
