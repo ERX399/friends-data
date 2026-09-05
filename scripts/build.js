@@ -21,6 +21,9 @@ const IMG_SPONSORS = path.join(ROOT, 'data', 'sponsors-img');
 /** Domain used to resolve relative avatar paths in output */
 const DOMAIN = 'https://raw-f.520pro.top';
 
+/** Suffix appended to description when a site is marked as suspected offline. */
+const DOWN_SUFFIX = '（此站点疑似下线）';
+
 function isNonEmptyString(v) { return typeof v === 'string' && v.trim().length > 0; }
 function isNullOrString(v)   { return v === null || typeof v === 'string'; }
 
@@ -41,6 +44,17 @@ function resolveAvatar(avatar) {
     return DOMAIN + avatar;
   }
   return avatar;
+}
+
+/**
+ * If a friend is marked as down (status === 'down'), append a suffix to its
+ * description once, so the rendered list reflects its suspected-offline state.
+ * Idempotent: does not append twice.
+ */
+function applyOfflineSuffix(data) {
+  if (data.status !== 'down') return;
+  const d = data.description;
+  data.description = (d && isNonEmptyString(d) ? d.trim() : '') + DOWN_SUFFIX;
 }
 
 function loadAndValidate(dir, label, rules) {
@@ -69,6 +83,10 @@ const friends = loadAndValidate(DATA_FRIENDS, 'friends', [
   d => !isNullOrString(d.avatar) ? ['avatar must be string or null'] : [],
   d => !isNonEmptyString(d.url) ? ['url required'] : [],
 ]);
+
+// Append offline suffix for suspected-down sites before sorting/output.
+friends.forEach(applyOfflineSuffix);
+
 // VIP first, then alphabetical by name
 friends.sort((a, b) => {
   if (a.vip && !b.vip) return -1;
