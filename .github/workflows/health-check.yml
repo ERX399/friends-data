@@ -20,8 +20,6 @@ jobs:
     steps:
       - name: Checkout trusted scripts
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.repository.default_branch }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -49,7 +47,7 @@ jobs:
           if [ -n "$(git status --porcelain)" ]; then
             git add data/friends
             git commit -m "chore: mark suspected down sites [skip ci]"
-            git push
+            git push origin HEAD:main
           else
             echo "No changes"
           fi
