@@ -33,7 +33,7 @@ jobs:
 
       - name: Install Playwright
         run: |
-          npm install -D @playwright/test
+          npm install --no-save @playwright/test
           npx playwright install-deps chromium
           npx playwright install chromium
 
@@ -44,7 +44,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          if [ -n "$(git status --porcelain)" ]; then
+          if [ -n "$(git status --porcelain data/friends)" ]; then
             git add data/friends
             git commit -m "chore: mark suspected down sites [skip ci]"
             git pull --rebase origin main
