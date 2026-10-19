@@ -1,4 +1,14 @@
+<div align="center">
+
+![:name](https://count.getloli.com/@friends-data?name=friends-data&theme=minecraft&padding=6&offset=0&align=top&scale=1&pixelated=1&darkmode=auto)
+
 # friends-and-sponsors
+
+_✨ 友链与赞助数据源 · 社区 PR 自动审核 ✨_
+
+[![GitHub](https://img.shields.io/badge/作者-ERX399-blue)](https://github.com/ERX399)
+
+</div>
 
 Xia 的友链和赞助数据源。
 
